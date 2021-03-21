@@ -1,15 +1,17 @@
 version: '3'
 
+ 
 services:
   db:
     image: postgres:13.1
     restart: always
     environment:
       - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=
+      - POSTGRES_PASSWORD=*******FILL******
+      - POSTGRES_DB=nextcloud
       - APP_DB_USER=przemek
-      - APP_DB_PASS=
-      - APP_DB_NAME=nextcloud
+      - APP_DB_PASS=*******FILL******
+      
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
       - /nextcloud/postgres:/var/lib/postgresql/data
@@ -28,5 +30,4 @@ services:
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
-      - POSTGRES_PASSWORD=
-      - POSTGRES_HOST=nextcloud_docker_db_1
+      - POSTGRES_HOST=nextcloud_docker_db_1:5432
