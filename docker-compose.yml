@@ -7,10 +7,10 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=*******FILL******
+      - POSTGRES_PASSWORD=*******FILL*********
       - POSTGRES_DB=nextcloud
       - APP_DB_USER=przemek
-      - APP_DB_PASS=*******FILL******
+      - APP_DB_PASS=*******FILL*********
       
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
@@ -27,6 +27,8 @@ services:
       - db
     volumes:
       - /nextcloud/data:/var/www/html
+      - /nextcloud/config:/var/www/html/config
+      - /nextcloud/apps:/var/www/html/custom_apps
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
