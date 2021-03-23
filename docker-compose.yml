@@ -31,9 +31,7 @@ services:
       - db
     volumes:
       - /nextcloud/nextcloud:/var/www/html
-      - ./apache:/etc/apache2/sites-enabled
-      #- ./certs:/etc/letsencrypt/live/przemekgorzynski.pl
-    command: certbot certonly --apache -d www.przemekgorzynski.pl --non-interactive --agree-tos -m przeyslaw.gorzynski@protonmail.com
+      #- ./apache:/etc/apache2/sites-enabled
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
