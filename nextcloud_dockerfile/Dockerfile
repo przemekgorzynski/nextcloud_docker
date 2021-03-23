@@ -6,8 +6,8 @@ RUN apt update -y \
     && apt install apache2 libapache2-mod-wsgi python-dev -y \
     && apt-get install python-certbot-apache -y \
     && a2enmod ssl \
-    && certbot --apache -d przemekgorzynski.pl --non-interactive --agree-tos -m przeyslaw.gorzynski@protonmail.com \ 
-    && certbot renew \
+    && certbot --apache -d przemekgorzynski.pl --non-interactive --agree-tos -m przeyslaw.gorzynski@protonmail.com \
+    && service apache2 restart \
     && apt-get update -y \
     && apt-get clean \
 
