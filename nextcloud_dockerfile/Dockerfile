@@ -7,6 +7,7 @@ RUN apt update -y \
     && apt-get install python-certbot-apache -y \
     && a2enmod ssl \
     && certbot --apache -d przemekgorzynski.pl --non-interactive --agree-tos -m przeyslaw.gorzynski@protonmail.com \
+    && certbot renew --dry-run \
     && service apache2 restart \
     && apt-get update -y \
     && apt-get clean \

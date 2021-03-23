@@ -2,6 +2,15 @@ version: '3'
 
  
 services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+  
   db:
     image: postgres:13.1
     container_name: nextcloud_postgres
@@ -19,19 +28,17 @@ services:
       - 5432:5432
 
   app:
-    build: ./nextcloud_dockerfile
+    image: nextcloud
     container_name: nextcloud_app
     restart: always
     depends_on:
       - db
     ports:
-      - 80:80
-      - 443:443
+      - 8080:80
     links:
       - db
     volumes:
       - /nextcloud/nextcloud:/var/www/html
-      #- ./apache:/etc/apache2/sites-enabled
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
