@@ -6,8 +6,12 @@ services:
     image: nginx
     container_name: nginx
     restart: always
+    networks:
+      nextcloud_network:
+        ipv4_address: 172.22.0.2
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./nginx:/etc/nginx/conf.d
   
@@ -15,6 +19,9 @@ services:
     image: postgres:13.1
     container_name: nextcloud_postgres
     restart: always
+    networks:
+      nextcloud_network:
+        ipv4_address: 172.22.0.3
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=gXtRx9JZxWTWp3
@@ -31,8 +38,12 @@ services:
     image: nextcloud
     container_name: nextcloud_app
     restart: always
+    networks:
+      nextcloud_network:
+        ipv4_address: 172.22.0.4
     depends_on:
       - db
+      - nginx
     ports:
       - 8080:80
     links:
@@ -43,3 +54,11 @@ services:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
       - POSTGRES_HOST=nextcloud_postgres:5432
+
+
+networks:
+  nextcloud_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
