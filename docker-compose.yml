@@ -8,10 +8,10 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=*******FILL*********
+      - POSTGRES_PASSWORD=gXtRx9JZxWTWp3
       - POSTGRES_DB=nextcloud
       - APP_DB_USER=przemek
-      - APP_DB_PASS=*******FILL*********
+      - APP_DB_PASS=J6mhrL2hnqs77J
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
       - /nextcloud/postgres:/var/lib/postgresql/data
@@ -25,13 +25,13 @@ services:
     depends_on:
       - db
     ports:
-      - 8080:80
+      - 80:80
     links:
       - db
     volumes:
-      - /nextcloud/data:/var/www/html
-      - /nextcloud/config:/var/www/html/config
-      - /nextcloud/apps:/var/www/html/custom_apps
+      - /nextcloud/nextcloud:/var/www/html
+      - ./apache:/etc/apache2/sites-enabled
+    #command: certbot --apache
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
