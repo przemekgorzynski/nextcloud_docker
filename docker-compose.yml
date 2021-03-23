@@ -19,19 +19,21 @@ services:
       - 5432:5432
 
   app:
-    image: nextcloud
+    build: ./nextcloud_dockerfile
     container_name: nextcloud_app
     restart: always
     depends_on:
       - db
     ports:
       - 80:80
+      - 443:443
     links:
       - db
     volumes:
       - /nextcloud/nextcloud:/var/www/html
       - ./apache:/etc/apache2/sites-enabled
-    #command: certbot --apache
+      - ./certs:/etc/letsencrypt/live/przemekgorzynski.pl
+    command: certbot certonly --apache -d www.przemekgorzynski.pl --non-interactive --agree-tos -m przeyslaw.gorzynski@protonmail.com
     environment:
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=przemek
