@@ -4,6 +4,7 @@ RUN apt update -y \
     && apt-get install software-properties-common -y \
     && apt install certbot -y \
     && apt-get install python-certbot-apache -y \
+    $$ sudo a2enmod ssl \
     && apt-get update -y \
     && apt-get clean \
 
