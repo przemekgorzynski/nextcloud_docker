@@ -11,6 +11,7 @@ services:
         ipv4_address: 172.22.0.2
     ports:
       - 80:80
+      - 8080:8080
       - 443:443
     volumes:
       - ./nginx:/etc/nginx/conf.d
@@ -44,8 +45,6 @@ services:
     depends_on:
       - db
       - nginx
-    #ports:
-    #  - 8080:80
     links:
       - db
     volumes:
