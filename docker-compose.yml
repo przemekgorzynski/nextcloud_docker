@@ -25,10 +25,10 @@ services:
         ipv4_address: 172.22.0.3
     environment:
       - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=gXtRx9JZxWTWp3
       - POSTGRES_DB=nextcloud
       - APP_DB_USER=przemek
-      - APP_DB_PASS=J6mhrL2hnqs77J
+    env_file:
+     - env_secrets.env
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
       - /nextcloud/postgres:/var/lib/postgresql/data
